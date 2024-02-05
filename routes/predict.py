@@ -22,6 +22,7 @@ def predict():
         output = model.predict(img, conf=0.3, imgsz=720)
         names = model.names
 
+
         # Process the output as needed
         detected_objects = {}
 
@@ -31,8 +32,13 @@ def predict():
                 detected_objects[class_name] = detected_objects.get(class_name, 0) + 1
 
         # Convert the detected_objects dictionary to the desired format
-        formatted_detected_objects = [{"wound_name": key} for key, value in detected_objects.items()]
-
-        return jsonify({"detected_objects": formatted_detected_objects})
+        if detected_objects:
+            most_frequent_key = max(detected_objects, key=detected_objects.get)
+            # Format hasil deteksi sesuai dengan format yang diinginkan
+            return jsonify({"detected_objects": most_frequent_key})
+        else:
+            return jsonify({"detected_objects": "tidak ada objek terdeteksi"})
 
     return jsonify({"error": "No image file provided"}), 400
+
+        # Format hasil deteksi sesuai dengan format yang diinginkan
