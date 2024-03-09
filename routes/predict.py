@@ -8,7 +8,7 @@ from io import BytesIO
 from ultralytics import YOLO
 
 predict_bp = Blueprint("predict", __name__)
-model = YOLO('best.pt')
+model = YOLO('best.pt')# Load the model
 
 
 @predict_bp.route("/predict", methods=["POST"])
