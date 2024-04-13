@@ -8,7 +8,7 @@ from io import BytesIO
 from ultralytics import YOLO
 
 predict_bp = Blueprint("predict", __name__)
-model = YOLO('best_model.pt')# Load the model
+model = YOLO('best.pt')# Load the model
 
 
 @predict_bp.route("/predict", methods=["POST"])
@@ -41,4 +41,3 @@ def predict():
 
     return jsonify({"error": "No image file provided"}), 400
 
-        # Format hasil deteksi sesuai dengan format yang diinginkan
